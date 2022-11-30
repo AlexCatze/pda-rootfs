@@ -21,6 +21,18 @@ jobs:
     - name: Debootstrap
       run: sudo qemu-debootstrap --no-check-gpg --arch=armel stretch ./rootfs ftp://ftp.nl.debian.org/debian/
 
+    - name: Provide nameserver info
+      run: sudo echo "nameserver 8.8.8.8" > ./rootfs/etc/resolv.conf
+
+    - name: Populate sources.list
+      run: yes | sudo cp ./sources.list ./rootfs/etc/apt
+
+    - name: Run apt update
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt update'
+
+    - name: Run apt upgrade
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt upgrade -y'
+
     - name: Pack to tar
       run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
 

@@ -60,7 +60,7 @@ echo "All files present. Going to deploy."
 
 mkdir ./mount
 echo "Formating boot"
-mkfs -t vfat -L BOOT $BOOT
+mkfs -t vfat -n BOOT $BOOT
 echo "Mounting boot"
 mount $BOOT ./mount
 echo "Copying boot files"
@@ -75,9 +75,9 @@ yes | mkfs -t ext3 -L LINUX $LINUX
 echo "Mounting linux"
 mount $LINUX ./mount
 echo "Extracting rootfs"
-tar -C ./mount -xvf $ROOTFS #tar -C ./mount -xvf $ROOTFS rootfs
+tar -C ./mount -xvf $ROOTFS --strip-components=2 #tar -C ./mount -xvf $ROOTFS rootfs
 echo "Extracting modules"
-tar -C ./mount -xvf $MODULES #tar -C ./mount -xvf $MODULES modules
+tar -C ./mount -xvf $MODULES --strip-components=2 #tar -C ./mount -xvf $MODULES modules
 echo "Unmounting linux"
 umount ./mount
 echo "Cleaning up"
