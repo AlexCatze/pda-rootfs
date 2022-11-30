@@ -33,6 +33,15 @@ jobs:
     - name: Run apt upgrade
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt upgrade -y'
 
+    - name: Install locales
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt install locales -y'
+
+    - name: Setup locales
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; export LC_ALL=C; echo "LANG=\"en_US.UTF-8\"" > /etc/default/locale; export LANGUAGE=en_US.UTF-8; export LANG=en_US.UTF-8; update-locale "LANG=en_US.UTF-8"; locale-gen --purge "en_US.UTF-8"; dpkg-reconfigure --frontend noninteractive locales'
+
+    - name: Setup additional packages
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; DEBIAN_FRONTEND=noninteractive apt install icewm xinit -y'
+
     - name: Pack to tar
       run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
 
