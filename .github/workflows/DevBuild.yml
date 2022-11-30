@@ -22,7 +22,7 @@ jobs:
       run: sudo qemu-debootstrap --no-check-gpg --arch=armel stretch ./rootfs ftp://ftp.nl.debian.org/debian/
 
     - name: Pack to tar
-      run: sudo tar -C ./rootfs/ --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./*
+      run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
