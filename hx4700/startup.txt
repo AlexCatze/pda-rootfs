@@ -1,0 +1,11 @@
+set FBDURINGBOOT 1
+set kernel "hx4700-zImage"
+set MTYPE 562
+
+## for SD-card
+set cmdline "console=tty0 pxa27x_maxfreq=624 root=/dev/mmcblk0p2 rw rootdelay=2"
+
+## for CF-card
+##set cmdline "root=/dev/sda2 rw console=tty0 console=ttyS0,115200n8 rootdelay=2 no_console_suspend=1 pxa27x_maxfreq=624"
+
+boot
