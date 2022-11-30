@@ -1,0 +1,35 @@
+name: Dev Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Requirements
+      run: apt install -y qemu-user-static qemu-debootstrap qemu-user-static-binfmt
+      env:
+        USERNAME: ${{ github.actor }}
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Debootstrap
+      run: sudo qemu-debootstrap --no-check-gpg --arch=armel stretch ./rootfs ftp://ftp.nl.debian.org/debian/
+
+    - name: Pack to tar
+      run: tar --create --ignore-failed-read --preserve-permissions --recursion --preserve-order --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: dev-${{ github.sha }}
+        prerelease: true
+        name: Dev build ${{ github.sha }}
+        files: |
+          rootfs.tar.gz
+
