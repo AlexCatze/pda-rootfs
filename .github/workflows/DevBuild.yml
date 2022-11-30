@@ -17,15 +17,12 @@ jobs:
 
     - name: Setup Requirements
       run: sudo apt install -y qemu-user-static debootstrap
-      env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Debootstrap
       run: sudo qemu-debootstrap --no-check-gpg --arch=armel stretch ./rootfs ftp://ftp.nl.debian.org/debian/
 
     - name: Pack to tar
-      run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
+      run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/*
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
