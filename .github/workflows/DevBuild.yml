@@ -22,10 +22,10 @@ jobs:
       run: sudo qemu-debootstrap --no-check-gpg --arch=armel stretch ./rootfs ftp://ftp.nl.debian.org/debian/
 
     - name: Provide nameserver info
-      run: sudo echo "nameserver 8.8.8.8" > ./rootfs/etc/resolv.conf
+      run: sudo bash -c 'echo "nameserver 8.8.8.8" > ./rootfs/etc/resolv.conf'
 
     - name: Populate sources.list
-      run: yes | sudo cp ./sources.list ./rootfs/etc/apt
+      run: yes | sudo cp ./sources.list ./rootfs/etc/apt/sources.list
 
     - name: Run apt update
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt update'
