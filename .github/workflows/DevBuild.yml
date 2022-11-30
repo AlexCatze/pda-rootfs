@@ -12,6 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Apt Update
+      run: sudo apt update
+
     - name: Setup Requirements
       run: sudo apt install -y qemu-user-static qemu-debootstrap qemu-user-static-binfmt
       env:
