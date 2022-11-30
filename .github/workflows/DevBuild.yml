@@ -16,7 +16,7 @@ jobs:
       run: sudo apt update
 
     - name: Setup Requirements
-      run: sudo apt install -y qemu-user-static qemu-debootstrap qemu-user-static-binfmt
+      run: sudo apt install -y qemu-user-static
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
