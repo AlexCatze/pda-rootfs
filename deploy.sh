@@ -19,7 +19,7 @@ echo "Deploying system for $PLATFORM to $DESTINATION"
 ROOTFS=./workdir/rootfs.tar.gz
 ZIMAGE=./workdir/$PLATFORM-zImage
 MODULES=./workdir/$PLATFORM-modules.tar.gz
-HARET=./rootfs/haret-w.exe
+HARET=./shared/haret-w.exe
 STARTUP=./$PLATFORM/startup.txt
 BOOT=${DESTINATION}p1
 LINUX=${DESTINATION}p2
