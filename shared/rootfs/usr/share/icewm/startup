@@ -5,3 +5,5 @@ if [[ ! -f "$flag" ]] ; then
   /bin/bash /bin/oobe.sh > /var/log/oobe.log
   touch "$flag"
 fi
+
+nm-applet&

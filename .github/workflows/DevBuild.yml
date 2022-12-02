@@ -37,10 +37,13 @@ jobs:
 #      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; export LC_ALL=C; echo "LANG=\"en_US.UTF-8\"" > /etc/default/locale; export LANGUAGE=en_US.UTF-8; export LANG=en_US.UTF-8; update-locale "LANG=en_US.UTF-8"; locale-gen --purge "en_US.UTF-8"; dpkg-reconfigure --frontend noninteractive locales'
 
     - name: Setup additional packages
-      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; DEBIAN_FRONTEND=noninteractive apt install icewm xinit -y'
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends icewm xinit xterm dillo xfe network-manager-gnome libfakekey0 -y'
 
     - name: Setup icewm autostart
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; systemctl enable xinit.service'
+
+    - name: Setup root password
+      run: echo "toor" | passwd --stdin root
 
     - name: Pack to tar
       run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
