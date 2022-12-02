@@ -42,8 +42,8 @@ jobs:
     - name: Setup icewm autostart
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; systemctl enable xinit.service'
 
-    - name: Setup root password
-      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; echo "toor" | passwd --stdin root'
+#    - name: Setup root password
+#      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; echo "toor" | passwd --stdin root'
 
     - name: Pack to tar
       run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
