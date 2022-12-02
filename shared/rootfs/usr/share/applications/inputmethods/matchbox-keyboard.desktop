@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Keyboard
 Comment=Virtual Keyboard
-Exec=matchbox-keyboard
+Exec=matchbox-keyboard-toggler
 Type=Application
 Icon=matchbox-keyboard.png
 Categories=Panel;Utility;MB

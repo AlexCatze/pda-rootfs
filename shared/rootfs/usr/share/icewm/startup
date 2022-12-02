@@ -7,3 +7,4 @@ if [[ ! -f "$flag" ]] ; then
 fi
 
 nm-applet&
+while true; do MB_KBD_CONFIG=/usr/share/matchbox-keyboard/keyboard.xml matchbox-keyboard -d; done &
