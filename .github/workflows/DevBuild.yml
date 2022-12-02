@@ -22,7 +22,7 @@ jobs:
       run: yes | sudo cp -r ./shared/rootfs/* ./rootfs/
 
     - name: Apply flags
-      run: sudo chmod +x /mnt/usr/share/icewm/startup
+      run: sudo chmod +x ./rootfs/usr/share/icewm/startup
 
     - name: Run apt update
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt update'
@@ -43,7 +43,7 @@ jobs:
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; systemctl enable xinit.service'
 
     - name: Setup root password
-      run: echo "toor" | passwd --stdin root
+      run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; echo "toor" | passwd --stdin root'
 
     - name: Pack to tar
       run: sudo tar --create --ignore-failed-read --preserve-permissions --recursion --sparse --totals --wildcards --verbose --gzip --file=rootfs.tar.gz ./rootfs/
