@@ -5,6 +5,6 @@ Comment=Run the calibration tool for touchscreens
 Exec=xinput_calibrator --output-filename /usr/share/X11/xorg.conf.d/99-calibration.conf
 Terminal=true
 Type=Application
-Icon=xinput_calibrator
+Icon=input-tablet.png
 StartupNotify=true
 Categories=System;Settings;

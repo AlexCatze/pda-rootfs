@@ -1,0 +1,10 @@
+prog Terminal xterm x-terminal-emulator -ls
+prog "File Manager" xfe xfe
+prog Dillo dillo dillo
+separator
+menuprog "Desktop Apps" folder /usr/bin/icewm-menu-fdo
+menu Settings /usr/share/icons/Adwaita/32x32/categories/preferences-system.png {
+    prog "Screen calibration" /usr/share/icons/Adwaita/32x32/devices/input-tablet.png xinput_calibrator --output-filename /usr/share/X11/xorg.conf.d/99-calibration.conf
+
+    menuprog "Wireless" /usr/share/icons/Adwaita/32x32/devices/network-wireless.png /usr/bin/icewm-menu-wireless.sh
+}
