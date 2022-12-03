@@ -22,7 +22,7 @@ jobs:
       run: yes | sudo cp -r ./shared/rootfs/* ./rootfs/
 
     - name: Apply flags
-      run: sudo chmod +x ./rootfs/usr/share/icewm/startup
+      run: sudo chmod +x ./rootfs/etc/X11/icewm/startup
 
     - name: Run apt update
       run: sudo chroot ./rootfs /bin/bash -c 'export PATH="/usr/sbin:/usr/bin:/sbin:/bin"; apt update'
